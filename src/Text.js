@@ -18,12 +18,21 @@ export default function Text() {
     }
 
     function getSuggestions(event) {
-        const word = inputText.length > 0 ? inputText[inputText.length - 1] : '';
 
-        if (word === '') {
+        if (inputText.length === 0) {
             setSuggestions([]);
         } else {
-            setSuggestions(find(word));
+            let index = inputText.length - 1;
+
+            while (index >= 0 && inputText[index] === '') {
+                index--;
+            }
+
+            if (index >= 0) {
+                setSuggestions(find(inputText[index]));
+            } else {
+                setSuggestions([]);
+            }
         }
     }
 
@@ -31,7 +40,7 @@ export default function Text() {
         <div className="text">
             <input className="input" type="text"
             placeholder="Type here"
-            onKeyUp={handleChange} maxLength={1000}/>
+            onChange={handleChange} maxLength={1000}/>
 
             <div className="sugg">
                {suggestions.map((item) => 

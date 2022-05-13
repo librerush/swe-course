@@ -59,7 +59,11 @@ const minimumEditDistance = (word1, word2) => {
 }
 
 export function find(word) {
-    console.log('find ' + word)
+    console.log('find: ' + word)
+
+    if (!isNaN(parseInt(word))) {
+        return [];
+    }
 
     let minDist = 1000000000;
     let minStr = '';
